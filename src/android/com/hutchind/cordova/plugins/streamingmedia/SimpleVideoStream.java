@@ -32,6 +32,7 @@ public class SimpleVideoStream extends Activity implements
 	private String mVideoUrl;
 	private Boolean mShouldAutoClose = true;
 	private boolean mControls;
+	private Map<String, String> headers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,10 @@ public class SimpleVideoStream extends Activity implements
 
 		Bundle b = getIntent().getExtras();
 		mVideoUrl = b.getString("mediaUrl");
+		headers = new Hashmap<String, String>();
+		headers.put("user", b.getString("user"));
+		headers.put("sid", b.getString("sid"));
+	
 		mShouldAutoClose = b.getBoolean("shouldAutoClose");
 		mShouldAutoClose = mShouldAutoClose == null ? true : mShouldAutoClose;
 		mControls = b.getBoolean("controls", true);
@@ -78,7 +83,7 @@ public class SimpleVideoStream extends Activity implements
 			mVideoView.setOnCompletionListener(this);
 			mVideoView.setOnPreparedListener(this);
 			mVideoView.setOnErrorListener(this);
-			mVideoView.setVideoURI(videoUri);
+			mVideoView.setVideoURI(videoUri, headers);
 			mMediaController = new MediaController(this);
 			mMediaController.setAnchorView(mVideoView);
 			mMediaController.setMediaPlayer(mVideoView);
