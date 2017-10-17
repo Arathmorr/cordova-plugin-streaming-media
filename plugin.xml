@@ -17,9 +17,9 @@
 
 	<keywords>Streaming, Media, Video, Audio, Android, iOS</keywords>
 
-	<repo>https://github.com/nchutchind/Streaming-Media-Cordova-Plugin.git</repo>
+	<repo>https://github.com/Arathmorr/cordova-plugin-streaming-media</repo>
 
-	<issue>https://github.com/nchutchind/Streaming-Media-Cordova-Plugin/issues</issue>
+	<issue>https://github.com/Arathmorr/cordova-plugin-streaming-media/issues</issue>
 
 	<engines>
 		<engine name="cordova" version=">=3.0.0" />
