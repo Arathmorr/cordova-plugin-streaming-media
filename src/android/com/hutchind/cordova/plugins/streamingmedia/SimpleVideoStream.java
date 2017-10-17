@@ -79,7 +79,7 @@ public class SimpleVideoStream extends Activity implements
 	private void play() {
 		mProgressBar.setVisibility(View.VISIBLE);
 		Uri videoUri = Uri.parse(mVideoUrl);
-		log.v("Headers received: " + headers);
+		Log.v("Headers received: " + headers);
 		try {
 			mVideoView.setOnCompletionListener(this);
 			mVideoView.setOnPreparedListener(this);
