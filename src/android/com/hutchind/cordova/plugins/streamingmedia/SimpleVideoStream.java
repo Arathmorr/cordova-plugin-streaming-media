@@ -33,7 +33,7 @@ public class SimpleVideoStream extends Activity implements
 	private String mVideoUrl;
 	private Boolean mShouldAutoClose = true;
 	private boolean mControls;
-	private Map<String, String> headers;
+	private HashMap<String, String> headers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class SimpleVideoStream extends Activity implements
 
 		Bundle b = getIntent().getExtras();
 		mVideoUrl = b.getString("mediaUrl");
-		headers = new Hashmap<String, String>();
+		headers = new HashMap<String, String>();
 		headers.put("user", b.getString("user"));
 		headers.put("sid", b.getString("sid"));
 	
