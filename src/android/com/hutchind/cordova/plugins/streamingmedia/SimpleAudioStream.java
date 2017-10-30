@@ -16,6 +16,7 @@ import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.MediaController;
+import java.util.HashMap;
 
 public class SimpleAudioStream extends Activity implements
 		MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener,
@@ -29,6 +30,7 @@ public class SimpleAudioStream extends Activity implements
 	private View mMediaControllerView;
 	private String mAudioUrl;
 	private Boolean mShouldAutoClose = true;
+	private HashMap<String, String> headers;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -36,6 +38,9 @@ public class SimpleAudioStream extends Activity implements
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		Bundle b = getIntent().getExtras();
 		mAudioUrl = b.getString("mediaUrl");
+		headers = new HashMap<String, String>();
+		headers.put("user", b.getString("user"));
+		headers.put("sid", b.getString("sid"));
 		String backgroundColor = b.getString("bgColor");
 		String backgroundImagePath = b.getString("bgImage");
 		String backgroundImageScale = b.getString("bgImageScale");
@@ -91,7 +96,8 @@ public class SimpleAudioStream extends Activity implements
 					Log.e(TAG, e.toString());
 				}
 			}
-			mMediaPlayer.setDataSource(this, myUri); // Go to Initialized state
+			Log.v(TAG, "Headers received: " + headers);
+			mMediaPlayer.setDataSource(this, myUri, headers); // Go to Initialized state
 			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mMediaPlayer.setOnPreparedListener(this);
 			mMediaPlayer.setOnCompletionListener(this);
