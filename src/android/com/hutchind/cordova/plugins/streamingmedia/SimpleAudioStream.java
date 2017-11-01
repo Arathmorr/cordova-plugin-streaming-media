@@ -97,7 +97,11 @@ public class SimpleAudioStream extends Activity implements
 				}
 			}
 			Log.v(TAG, "Headers received: " + headers);
-			mMediaPlayer.setDataSource(this, myUri, headers); // Go to Initialized state
+			try {
+				mMediaPlayer.setDataSource(this, myUri, headers); // Go to Initialized state
+			} catch (Exception e) {
+				Log.e(TAG, e.toString());
+			}
 			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mMediaPlayer.setOnPreparedListener(this);
 			mMediaPlayer.setOnCompletionListener(this);
