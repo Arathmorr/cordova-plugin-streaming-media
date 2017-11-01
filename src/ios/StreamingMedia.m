@@ -1,5 +1,6 @@
 #import "StreamingMedia.h"
 #import <Cordova/CDV.h>
+#import "StreamingMedia.h"
 
 @interface StreamingMedia()
 	- (void)parseOptions:(NSDictionary *) options type:(NSString *) type;
@@ -10,11 +11,18 @@
 	- (void)startPlayer:(NSString*)uri;
 	- (void)moviePlayBackDidFinish:(NSNotification*)notification;
 	- (void)cleanup;
+
+	{
+		@public
+			NSString user;
+			NSString sid;
+	}
 @end
 
 @implementation StreamingMedia {
 	NSString* callbackId;
 	MPMoviePlayerController *moviePlayer;
+	//AVPlayer *avPlayer; //new
 	BOOL shouldAutoClose;
 	UIColor *backgroundColor;
 	UIImageView *imageView;
@@ -70,14 +78,25 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 		}
 	}
 	// No specific options for video yet
-}
+	
+	// Set headers in container.
+	
+	if (![options isKindOfClass:[NSNull class]] && [options objectForKey:@"user"]) {
+		//[headers setObject:@"user" forKey:@"user"]; //SET USER HEADER
+		user = [options objectForKey:@"user"]
+	} 
+
+	if (![options isKindOfClass:[NSNull class]] && [options objectForKey:@"sid"]) {
+		//[headers setObject:@"sid" forKey:@"sid"]; //SET SID HEADER
+		sid = [options objectForKey:@"sid"]
+	}
 
 -(void)play:(CDVInvokedUrlCommand *) command type:(NSString *) type {
 	callbackId = command.callbackId;
 	NSString *mediaUrl  = [command.arguments objectAtIndex:0];
 	[self parseOptions:[command.arguments objectAtIndex:1] type:type];
 
-	[self startPlayer:mediaUrl];
+	[self startPlayer:mediaUrl]; //todo add headers
 }
 
 -(void)pause:(CDVInvokedUrlCommand *) command type:(NSString *) type {
@@ -197,10 +216,17 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 	[imageView setImage:[self getImage:imagePath]];
 }
 
--(void)startPlayer:(NSString*)uri {
+-(void)startPlayer:(NSString*)uri { //add headers
 	NSURL *url = [NSURL URLWithString:uri];
 
 	moviePlayer =  [[MPMoviePlayerController alloc] initWithContentURL:url];
+
+	/*
+	//NSString* *url = [NSString stringWithFormat:@"dfuzeProtocol://%@%@", [uri];
+	
+	NSString* theURLString = [NSString stringWithFormat:@"dfuzeProtocol://%@%@", [url host],[url path]];
+	moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:theURLString]];
+	*/
 
 	// Listen for playback finishing
 	[[NSNotificationCenter defaultCenter] addObserver:self

@@ -7,4 +7,7 @@
 - (void)playVideo:(CDVInvokedUrlCommand*)command;
 - (void)playAudio:(CDVInvokedUrlCommand*)command;
 
+extern NSString user;
+extern NSString sid;
+
 @end
