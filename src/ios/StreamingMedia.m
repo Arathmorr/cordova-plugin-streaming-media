@@ -217,16 +217,16 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 }
 
 -(void)startPlayer:(NSString*)uri { //add headers
-	NSURL *url = [NSURL URLWithString:uri];
+	//NSURL *url = [NSURL URLWithString:uri];
 
-	moviePlayer =  [[MPMoviePlayerController alloc] initWithContentURL:url];
+	//moviePlayer =  [[MPMoviePlayerController alloc] initWithContentURL:url];
 
-	/*
+	
 	//NSString* *url = [NSString stringWithFormat:@"dfuzeProtocol://%@%@", [uri];
 	
-	NSString* theURLString = [NSString stringWithFormat:@"dfuzeProtocol://%@%@", [url host],[url path]];
+	NSString* theURLString = [NSString stringWithFormat:@"dfuzeProtocol://%@%@", [uri]];
 	moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL URLWithString:theURLString]];
-	*/
+	
 
 	// Listen for playback finishing
 	[[NSNotificationCenter defaultCenter] addObserver:self
