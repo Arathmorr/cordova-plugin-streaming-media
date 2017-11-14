@@ -12,11 +12,10 @@
 	- (void)moviePlayBackDidFinish:(NSNotification*)notification;
 	- (void)cleanup;
 
-	{
-		@public
-			NSString user;
-			NSString sid;
-	}
+
+		@public NSString user;
+        @public NSString sid;
+	
 @end
 
 @implementation StreamingMedia {
