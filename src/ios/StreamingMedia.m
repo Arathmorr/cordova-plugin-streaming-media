@@ -83,12 +83,12 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 	
 	if (![options isKindOfClass:[NSNull class]] && [options objectForKey:@"user"]) {
 		//[headers setObject:@"user" forKey:@"user"]; //SET USER HEADER
-		user = [options objectForKey:@"user"]
+		user = [options objectForKey:@"user"];
 	} 
 
 	if (![options isKindOfClass:[NSNull class]] && [options objectForKey:@"sid"]) {
 		//[headers setObject:@"sid" forKey:@"sid"]; //SET SID HEADER
-		sid = [options objectForKey:@"sid"]
+		sid = [options objectForKey:@"sid"];
 	}
 
 -(void)play:(CDVInvokedUrlCommand *) command type:(NSString *) type {
