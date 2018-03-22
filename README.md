@@ -16,8 +16,8 @@ cordova plugin add cordova-plugin-streaming-media
 ```
 
 ### iOS specifics
-* Uses the MPMoviePlayerController.
-* Tested on iOS 7, 9
+* Uses the AVPlayer.
+* Tested on iOS 11
 
 ### Android specifics
 * Uses VideoView and MediaPlayer.
