@@ -185,9 +185,20 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
 -(void)startPlayer:(NSString*)uri { //add headers
 
-    NSString* theURLString = [NSString stringWithFormat:@"dfuzeProtocol://%@", uri];
-    NSURL *url = [NSURL URLWithString:theURLString];
+    //NSString* dummyString = @"https://beta.dfuze.net/api/media/337D8347950D8DDF";
+    //NSString* theURLString = [NSString stringWithFormat:@"dfuzeProtocol://%@", dummyString];
+    NSURL *url = [NSURL URLWithString:uri];
+    
+    NSMutableDictionary* headers = [NSMutableDictionary dictionary];
+    [headers setObject:user forKey:@"user"];
+    [headers setObject:sid forKey:@"sid"];
+    NSLog(@"headers %@", headers);
+    
+    AVURLAsset* asset = [AVURLAsset URLAssetWithURL:url options:@{@"AVURLAssetHTTPHeaderFieldsKey": headers}];
+    AVPlayerItem* item = [AVPlayerItem playerItemWithAsset:asset];
     AVPlayer *movie =  [AVPlayer playerWithURL:url];
+    [movie replaceCurrentItemWithPlayerItem:item];
+    
     moviePlayer = [[AVPlayerViewController alloc] init];
     
     [moviePlayer setPlayer: movie];
