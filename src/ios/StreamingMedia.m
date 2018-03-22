@@ -187,12 +187,12 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
 
     NSString* theURLString = [NSString stringWithFormat:@"dfuzeProtocol://%@", uri];
     NSURL *url = [NSURL URLWithString:theURLString];
-    AVPlayer *movie = [AVPlayer playerWithUrl:url];
+    AVPlayer *movie =  [AVPlayer playerWithURL:url];
     moviePlayer = [[AVPlayerViewController alloc] init];
     
     [moviePlayer setPlayer: movie];
     [moviePlayer setShowsPlaybackControls:YES];
-    if(@available(ios 11.0, *)) {moviePlayer setEntersFullScreenWhenPlaybackBegins:YES];}
+    if(@available(iOS 11.0, *)) { [moviePlayer setEntersFullScreenWhenPlaybackBegins:YES]; }
 
     [self.viewController presentViewController:moviePlayer animated:YES completion:^(void){
         [moviePlayer.player play];
@@ -208,7 +208,7 @@ NSString * const DEFAULT_IMAGE_SCALE = @"center";
     [[NSNotificationCenter defaultCenter] addObserver: self
                                             selector:@selector(moviePlayBackDidFinish:)
                                                 name:AVPlayerItemFailedToPlayToEndTimeNotification
-                                            object:moviePlayer.player.currentItem]
+                                               object:moviePlayer.player.currentItem];
     // Listen for orientation change
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(orientationChanged:)
